@@ -10,13 +10,15 @@ class Uzytkownik:
         haslo=[]
         hashtags=[]
 
-        self.driver=webdriver.Chrome('./chromedriver 2')
+        self.driver=webdriver.Chrome('./chromedriver')
 
     def log_in(self):
         print("Podaj login :")
         self.login=input()
         print("Podaj hasło :")
         self.haslo=input()
+        print("Wpisz hasztag :")
+        self.hasztags=input()
 
     def autorisation(self):
         self.driver.get("http://www.instagram.com")
@@ -47,11 +49,11 @@ class Uzytkownik:
         search = WebDriverWait(self.driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, "//input[@placeholder='Szukaj']")))
         search.clear()
-        tags = "#"
+        tags = self.hasztags
         search.send_keys(tags)
         time.sleep(5)
         my_link = self.driver.find_element(by=By.XPATH,
-                                      value='//*[@id="react-root"]/section/nav/div[2]/div/div/div[2]/div[3]/div/div[2]/div/ul/div/a/div')
+                                      value='//*[@id="react-root"]/section/nav/div[2]/div/div/div[2]/div[3]/div/div[2]/div/div[1]/a/div')
         my_link.click()
         time.sleep(5)
 
